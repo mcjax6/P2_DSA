@@ -3,4 +3,7 @@ project(P2_DSA)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(P2_DSA main.cpp SplayTree.cpp SplayTree.h Competitor.h)
+add_executable(P2_DSA main.cpp SplayTree.cpp SplayTree.h Competitor.h
+        ListProcessor.cpp
+        ListProcessor.h
+)

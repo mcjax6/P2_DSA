@@ -6,4 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(P2_DSA main.cpp SplayTree.cpp SplayTree.h Competitor.h
         ListProcessor.cpp
         ListProcessor.h
+        UserInterface.h
+        UserInterface.cpp
+)
+
+add_executable(UI_TEST
+        testingUI.cpp
+        UserInterface.cpp
+        UserInterface.h
+        ListProcessor.cpp
+        ListProcessor.h
+        Competitor.h
 )

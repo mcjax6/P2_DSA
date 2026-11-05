@@ -27,9 +27,9 @@ public:
     void insert(Competitor comp);
     Competitor search(int id);
 
-    void colorFlip(RedBlackNode *node);
-    void rotateLeft(RedBlackNode *node);
-    void rotateRight(RedBlackNode *node);
+    void colorFlip(RedBlackNode *node); //flips parent and uncle
+    void rotateLeft(RedBlackNode *node); //rotates left about the point
+    void rotateRight(RedBlackNode *node); //rotates right about the point
 
 
 };

@@ -92,7 +92,6 @@ void RedBlackTree::rotateRight(RedBlackNode *node) {
 }
 
 void RedBlackTree::insert(Competitor comp) {
-
     RedBlackNode *node = new RedBlackNode(comp);
     RedBlackNode *current = root;
     RedBlackNode *next = nullptr;
@@ -100,14 +99,15 @@ void RedBlackTree::insert(Competitor comp) {
     if(root) {
         path.push_back(root);
         if (current->data.composite_score > comp.composite_score) {
-            next = root->left;
+            next = current->left;
         }
         else {
-            next = root->right;
+            next = current->right;
         }
     }
     else {
         root = node;
+        root->red = false;
         return;
     }
 
@@ -115,10 +115,10 @@ void RedBlackTree::insert(Competitor comp) {
         path.push_back(next);
         current = next;
         if (current->data.composite_score > comp.composite_score) {
-            next = root->left;
+            next = current->left;
         }
         else {
-            next = root->right;
+            next = current->right;
         }
     }
 
@@ -138,5 +138,59 @@ void RedBlackTree::insert(Competitor comp) {
 
     bool lastRed = true; //true if the last element in path was red
 
+    RedBlackNode* curr = node;
 
+    while (curr != root && curr->parent->red == true) {
+        RedBlackNode* parent = curr->parent;
+        RedBlackNode* grandparent = parent->parent;
+
+        //Parent is left child
+        if (parent->isLeft) {
+            RedBlackNode* uncle = grandparent->right;
+
+            //Case 1: Uncle is red
+            if (uncle != nullptr && uncle->red == true) {
+                colorFlip(curr);
+                curr = grandparent;
+            }
+            //Case 2 and 3: Uncle is black
+            else {
+                if (curr->isLeft == false) {
+                    curr = parent;
+                    rotateLeft(curr);
+
+                    parent = curr->parent;
+                    grandparent = parent->parent;
+                }
+                parent->red = false;
+                grandparent->red = true;
+                rotateRight(grandparent);
+            }
+        }
+        //Parent is right child
+        else {
+            RedBlackNode* uncle = grandparent->left;
+
+            //Case 1: Uncle is red
+            if (uncle != nullptr && uncle->red == true) {
+                colorFlip(curr);
+                curr = grandparent;
+            }
+            //Case 2 and 3: Uncle is black
+            else {
+                if (curr->isLeft == true) {
+                    curr = parent;
+                    rotateRight(curr);
+
+                    parent = curr->parent;
+                    grandparent = parent->parent;
+                }
+                parent->red = false;
+                grandparent->red = true;
+                rotateLeft(grandparent);
+            }
+        }
+    }
+
+    root->red = false;
 }

@@ -194,3 +194,29 @@ void RedBlackTree::insert(Competitor comp) {
 
     root->red = false;
 }
+
+//blank if not found
+Competitor RedBlackTree::search(int id) {
+
+    RedBlackNode *current = root;
+    while (current) {
+
+        if (current->data.id == id) {
+
+            return current->data;
+
+        }
+        else if (current->data.id > id) {
+
+            current = current->left;
+
+        }
+        else {
+            current = current->right;
+        }
+
+    }
+
+    return Competitor();
+
+}

@@ -91,10 +91,8 @@ void RedBlackTree::insert(Competitor comp) {
     RedBlackNode *node = new RedBlackNode(comp);
     RedBlackNode *current = root;
     RedBlackNode *next = nullptr;
-    std::vector<RedBlackNode*> path;
     if(root) {
-        path.push_back(root);
-        if (current->data.composite_score > comp.composite_score) {
+        if (current->data.id > comp.id) {
             next = current->left;
         }
         else {
@@ -108,9 +106,8 @@ void RedBlackTree::insert(Competitor comp) {
     }
 
     while (next) {
-        path.push_back(next);
         current = next;
-        if (current->data.composite_score > comp.composite_score) {
+        if (current->data.id > comp.id) {
             next = current->left;
         }
         else {
@@ -118,7 +115,7 @@ void RedBlackTree::insert(Competitor comp) {
         }
     }
 
-    if (current->data.composite_score > comp.composite_score) {
+    if (current->data.id > comp.id) {
         current->left = node;
         node->parent = current;
         node->isLeft = true;
@@ -131,8 +128,6 @@ void RedBlackTree::insert(Competitor comp) {
         node->isLeft = false;
         node->red = true;
     }
-
-    bool lastRed = true; //true if the last element in path was red
 
     RedBlackNode* curr = node;
 

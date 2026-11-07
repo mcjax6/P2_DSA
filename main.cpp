@@ -15,8 +15,6 @@ int main() {
     RedBlackTree comps;
 
     for (auto i = 0; i < temp.size(); i++) {
-        std::cout << "ID: " << temp[i].id << std::endl;
-        std::cout << "Score: " << temp[i].composite_score << std::endl;
         comps.insert(temp[i]);
     }
 

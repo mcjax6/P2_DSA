@@ -43,19 +43,16 @@ void RedBlackTree::rotateLeft(RedBlackNode *node) {
     }
     else {
         root = rightC;
+        rightC->isLeft = false;
     }
 
     node->right = rightleftC;
-    if (!rightleftC) {
+    if (rightleftC != nullptr) {
         rightleftC->parent = node;
         rightleftC->isLeft = false;
     }
     node->parent = rightC;
     node->isLeft = true;
-
-    node->red = true;
-    rightC->red = false;
-
 }
 
 //only use if uncle and uncle is black. node is grandparent
@@ -77,19 +74,16 @@ void RedBlackTree::rotateRight(RedBlackNode *node) {
     }
     else {
         root = leftC;
+        leftC->isLeft = false;
     }
 
     node->left = leftrightC;
-    if (!leftrightC) {
+    if (leftrightC != nullptr) {
         leftrightC->parent = node;
         leftrightC->isLeft = true;
     }
     node->parent = leftC;
     node->isLeft = false;
-
-    node->red = true;
-    leftC->red = false;
-
 }
 
 

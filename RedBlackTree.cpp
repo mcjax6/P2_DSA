@@ -5,7 +5,7 @@
 #include "RedBlackTree.h"
 #include <vector>
 
-//only used if uncle is red
+//only use if there is an uncle and is red
 void RedBlackTree::colorFlip(RedBlackNode *node) {
 
     RedBlackNode *parent = node->parent;
@@ -24,7 +24,7 @@ void RedBlackTree::colorFlip(RedBlackNode *node) {
 
 }
 
-//only used if uncle is black and parent is red
+//only use if uncle and uncle is black. node is the "grandparent"
 void RedBlackTree::rotateLeft(RedBlackNode *node) {
 
     RedBlackNode* rightC = node->right;
@@ -33,11 +33,11 @@ void RedBlackTree::rotateLeft(RedBlackNode *node) {
 
     rightC->left = node;
     rightC->parent = parent;
-    if (!parent && node->isLeft) {
+    if (parent && node->isLeft) {
         parent->left = rightC;
         rightC->isLeft = true;
     }
-    else if (!parent) {
+    else if (parent) {
         parent->right = rightC;
         rightC->isLeft = false;
     }
@@ -58,6 +58,7 @@ void RedBlackTree::rotateLeft(RedBlackNode *node) {
 
 }
 
+//only use if uncle and uncle is black. node is grandparent
 void RedBlackTree::rotateRight(RedBlackNode *node) {
 
     RedBlackNode* leftC = node->left;
@@ -66,11 +67,11 @@ void RedBlackTree::rotateRight(RedBlackNode *node) {
 
     leftC->right = node;
     leftC->parent = parent;
-    if (!parent && node->isLeft) {
+    if (parent && node->isLeft) {
         parent->left = leftC;
         leftC->isLeft = true;
     }
-    else if (!parent) {
+    else if (parent) {
         parent->right = leftC;
         leftC->isLeft = false;
     }
@@ -90,6 +91,7 @@ void RedBlackTree::rotateRight(RedBlackNode *node) {
     leftC->red = false;
 
 }
+
 
 void RedBlackTree::insert(Competitor comp) {
     RedBlackNode *node = new RedBlackNode(comp);
@@ -206,7 +208,8 @@ Competitor RedBlackTree::search(int id) {
             return current->data;
 
         }
-        else if (current->data.id > id) {
+
+        if (current->data.id > id) {
 
             current = current->left;
 

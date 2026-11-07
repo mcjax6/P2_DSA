@@ -3,6 +3,7 @@
 #include <string>
 #include "Competitor.h"
 #include "ListProcessor.h"
+#include "RedBlackTree.h"
 
 int main() {
 
@@ -11,9 +12,15 @@ int main() {
     big.openFile("generated_data_100k.csv");
     std::vector<Competitor> temp = big.getCompList();
 
+    RedBlackTree comps;
+
     for (auto i = 0; i < temp.size(); i++) {
         std::cout << "ID: " << temp[i].id << std::endl;
         std::cout << "Score: " << temp[i].composite_score << std::endl;
+        comps.insert(temp[i]);
     }
+
+    Competitor random = comps.search(500);
+    std::cout << random.id << std::endl;
     
 }

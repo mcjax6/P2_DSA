@@ -4,23 +4,15 @@
 #include "Competitor.h"
 #include "ListProcessor.h"
 #include "RedBlackTree.h"
+#include "UserInterface.h"
 
 int main() {
 
-    ListProcessor big = ListProcessor();
-    big.updateWeights(1, 1, 1, 1);
-    big.openFile("generated_data_100k.csv");
-    std::vector<Competitor> temp = big.getCompList();
+    //Create the user interface using the competitor dataset
+    UserInterface ui("generated_data_100k.csv");
 
-    RedBlackTree comps;
+    //Start the program and display the main menu
+    ui.run();
 
-    for (auto i = 0; i < temp.size(); i++) {
-        std::cout << "ID: " << temp[i].id << std::endl;
-        std::cout << "Score: " << temp[i].composite_score << std::endl;
-        comps.insert(temp[i]);
-    }
-
-    Competitor random = comps.search(500);
-    std::cout << random.id << std::endl;
-    
+    return 0;
 }

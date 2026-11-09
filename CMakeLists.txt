@@ -8,4 +8,6 @@ add_executable(P2_DSA main.cpp SplayTree.cpp SplayTree.h Competitor.h
         ListProcessor.h
         RedBlackTree.cpp
         RedBlackTree.h
+        UserInterface.cpp
+        UserInterface.h
 )
